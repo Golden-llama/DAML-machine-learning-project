@@ -14,11 +14,12 @@ def remove_punctuation(text):
     return text
 
 df["text_no_punct"] = df["text"].apply(remove_punctuation)
+df["title_no_punct"] = df["title"].apply(remove_punctuation)
 
 df.to_csv("nopunct.csv", index =False)
 
-print(df.text_no_punct)
-print(df.text)
+#print(df.text_no_punct)
+#print(df.text)
 
 
 
