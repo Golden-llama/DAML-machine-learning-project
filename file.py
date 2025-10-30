@@ -17,7 +17,8 @@ df["text_no_punct"] = df["text"].apply(remove_punctuation)
 
 df.to_csv("nopunct.csv", index =False)
 
-print(df.head())
+print(df.text_no_punct)
+print(df.text)
 
 
 
