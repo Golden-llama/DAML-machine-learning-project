@@ -10,11 +10,11 @@ print(df.columns)
 
 def remove_punctuation(text):
     if isinstance(text, str):
-        text = re.sub(r"[“”‘’–—…]", " ", text)
+        text = re.sub(r"[“”‘’–—…]", "", text)
         text = re.sub(f"[{re.escape(string.punctuation)}]", "", text)
         return re.sub(r'\s+', ' ', text).strip()
     
-    
+  
     return text
 
 df["text"] = df["text"].apply(remove_punctuation)
