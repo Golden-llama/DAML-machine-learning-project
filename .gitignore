@@ -1,2 +1,7 @@
+ HEAD
 *.csv
 data/
+.DS_Store
+.idea/
+ 8a95d62 (Clean up system files and update .gitignore)
+
