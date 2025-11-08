@@ -2,7 +2,7 @@ import pandas as pd
 import string
 import re
 
-df = pd.read_csv('nostopwords.csv')
+df = pd.read_csv('WELFake_Dataset.csv')
 
 print(df.columns)
 
@@ -17,14 +17,13 @@ def remove_punctuation(text):
   
     return text
 
-df["text"] = df["text"].apply(remove_punctuation)
-df["title"] = df["title"].apply(remove_punctuation)
+df["text_no_punct"] = df["text"].apply(remove_punctuation)
+df["title_no_punct"] = df["title"].apply(remove_punctuation)
 
-df.to_csv("nopunctANDstopwords.csv", index =False)
+df.to_csv("nopunct.csv", index =False)
 
-#print(df.text_no_punct)
-#print(df.text)
-
+print(df.text)
+print(df.text_no_punct)
 
 
 
