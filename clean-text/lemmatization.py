@@ -6,7 +6,7 @@ nltk.download('punkt')
 nltk.download('wordnet')
 
 lemmatizer = WordNetLemmatizer()
-df = pd.read_csv('nopunctANDstopwords.csv')
+df = pd.read_csv('data/nopunctANDstopwords.csv')
 
 df[['title','text']] = df[['title','text']].replace(',',' ',regex=True)
 
@@ -20,6 +20,6 @@ def lemmatize(text):
 
 df[['title','text']] = df[['title','text']].applymap(lemmatize)
 
-df.to_csv('lemmatized.csv', index=False)
+df.to_csv('data/lemmatized.csv', index=False)
 
 
