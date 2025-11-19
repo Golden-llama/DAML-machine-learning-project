@@ -28,9 +28,9 @@ A linear classifier that models the probability of a class using weighted TF-IDF
 - Input must be fixed-length numeric vectors.
 
 ### Do We Follow These Assumptions?
-- ✔ Fixed-length numeric vectors — TF-IDF provides this.  
-- ✔ LR still performs well even when linear separability is imperfect.  
-- ❌ Independence assumption is violated (words co-occur), but LR is robust.
+- Fixed-length numeric vectors — TF-IDF provides this.  
+- LR still performs well even when linear separability is imperfect.  
+- Independence assumption is violated (words co-occur), but LR is robust.
 
 ---
 
@@ -58,9 +58,9 @@ XGBoost uses gradient-boosted decision trees, where each tree corrects errors fr
 - TF-IDF contains meaningful signal.
 
 ### Do We Follow These Assumptions?
-- ✔ All assumptions are satisfied.  
-- ✔ Nonlinear patterns exist in fake vs real news.  
-- ✔ TF-IDF provides ideal inputs for boosted trees.
+- All assumptions are satisfied.  
+- Nonlinear patterns exist in fake vs real news.  
+- TF-IDF provides ideal inputs for boosted trees.
 
 ---
 
