@@ -1,8 +1,65 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+########################################
+# IDE / Editor stuff
+########################################
+# IntelliJ / PyCharm
+.idea/
+shelf/
+workspace.xml
+
+# VS Code
+.vscode/
+
+# JetBrains HTTP client
+httpRequests/
+
+# Data source configs
+dataSources/
+dataSources.local.xml
+
+########################################
+# Python / build artifacts
+########################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Packaging
+*.egg-info/
+dist/
+build/
+
+########################################
+# Jupyter
+########################################
+.ipynb_checkpoints/
+
+########################################
+# Data & models (project-specific)
+########################################
+# Keep all big data local
+data/
+
+# Model binaries
+*.model
+*.model.*
+*.h5
+*.pt
+*.pth
+*.pkl
+*.pickle
+*.joblib
+
+########################################
+# OS cruft
+########################################
+.DS_Store
+Thumbs.db
