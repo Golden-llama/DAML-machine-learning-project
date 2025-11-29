@@ -47,6 +47,8 @@ build/
 ########################################
 # Keep all big data local
 data/
+/data/
+
 
 # Model binaries
 *.model

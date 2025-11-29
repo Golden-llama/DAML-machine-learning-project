@@ -4,10 +4,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # load clean data; contains columns title_clean, text_clean, label
 df = pd.read_csv('data/lemmatized.csv')
 
-# drop NAs
-df['text_clean'] = df['text_clean'].fillna('')
-
-# define TF–IDF vectorizer
 vectorizer = TfidfVectorizer(
     max_features=2000,
     ngram_range=(1, 2),

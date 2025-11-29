@@ -7,9 +7,10 @@ from sklearn.linear_model import LogisticRegression
 
 
 
-df = pd.DataFrame('lemmatized.csv')
+df = pd.read_csv('data/lemmatized.csv')
 
-df['document'] = df['title'] + ' ' + df['text']
+df['document'] = df['title_clean'] + ' ' + df['text_clean']
+
 def tag_and_tokenize(doc_series):
     
     tagged_data = [TaggedDocument(words=word_tokenize(_d.lower()), tags=[str(i)])
@@ -35,3 +36,15 @@ for i in range(len(tagged_data)):
 
 X = pd.DataFrame(doc_vectors)
 y = df['label']
+
+
+X.columns = [f'd2v_{i}' for i in range(X.shape[1])]
+
+df_doc2vec = pd.concat(
+    [X.reset_index(drop=True), y.reset_index(drop=True)],
+    axis=1
+)
+
+df_doc2vec.to_csv('data/doc2vec_dataset.csv', index=False)
+
+print(df_doc2vec.head())

@@ -10,7 +10,7 @@ lemmatizer = WordNetLemmatizer()
 
 df = pd.read_csv('data/nopunct_stopwords.csv')
 
-def lemmatize(text: str):
+def lemmatize(text):
     if isinstance(text, str):
         tokens = word_tokenize(text)
         lemmas = [lemmatizer.lemmatize(word) for word in tokens]
@@ -26,3 +26,4 @@ out = df[['title_clean', 'text_clean', 'label']]
 
 # save data set
 out.to_csv('data/lemmatized.csv', index=False)
+

@@ -3,11 +3,12 @@ import string
 import re
 
 df = pd.read_csv('data/WELFake_Dataset.csv')
+df = df.dropna(subset=['text']) # drop rows with missing body text
+df = df[df['text'].str.strip() != ''].reset_index(drop=True)
 
 print(df.columns)
 
 #removing punctuations
-
 def remove_punctuation(text):
     if isinstance(text, str):
         text = re.sub(r"[“”‘’–—…]", "", text)
