@@ -1,37 +1,39 @@
 import pandas as pd
-from gensim.models.doc2vec import Doc2Vec, TaggedDocument
-import nltk
-from nltk.tokenize import word_tokenize
+from gensim.models.doc2vec import TaggedDocument
+from gensim.utils import simple_preprocess
+from gensim.models import Doc2Vec
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression 
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, accuracy_score
 
 
 
-df = pd.DataFrame('lemmatized.csv')
+df = pd.read_csv('lemmatized.csv')
 
-df['document'] = df['title'] + ' ' + df['text']
-def tag_and_tokenize(doc_series):
-    
-    tagged_data = [TaggedDocument(words=word_tokenize(_d.lower()), tags=[str(i)])
-                   for i, _d in enumerate(doc_series)]
-    return tagged_data
+df['combined'] = df['title'] + ' ' + df['text']
 
 
-tagged_data = tag_and_tokenize(df['document'])
-model = Doc2Vec(vector_size=100, # 100-dimensional vectors
-                min_count=2,      # Ignore words that appear less than 2 times
-                epochs=40)        # Number of iterations over the dataset
+tagged_docs = [
+    TaggedDocument(words=row.split(), tags=[i])
+    for i, row in enumerate(df["combined"])
+]
+model = Doc2Vec(vector_size=100, window=5, min_count=2, workers=4, epochs=40)
 
-model.build_vocab(tagged_data)
+model.build_vocab(tagged_docs)
 
-model.train(tagged_data, total_examples=model.corpus_count, epochs=model.epochs)
+model.train(tagged_docs, total_examples=model.corpus_count, epochs=model.epochs)
 
-doc_vectors = []
+model.save("doc2vec_fakenews.model")
 
-for i in range(len(tagged_data)):
-    
-    vector = model.dv[str(i)]
-    doc_vectors.append(vector)
+X = [model.dv[i] for i in range(len(tagged_docs))]
+y = df["label"].values
 
-X = pd.DataFrame(doc_vectors)
-y = df['label']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+clf = LogisticRegression(max_iter=1000)
+clf.fit(X_train, y_train)
+
+preds = clf.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, preds))
+print("\nClassification Report:\n", classification_report(y_test, preds))
+
