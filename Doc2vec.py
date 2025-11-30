@@ -9,8 +9,9 @@ from sklearn.metrics import classification_report, accuracy_score
 
 
 df = pd.read_csv('lemmatized.csv')
+df[["title", "text"]] = df[["title", "text"]].fillna("")
 
-df['combined'] = df['title'] + ' ' + df['text']
+df['combined'] = df['title'].astype(str) + ' ' + df['text'].astype(str)
 
 
 tagged_docs = [
@@ -37,3 +38,14 @@ preds = clf.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, preds))
 print("\nClassification Report:\n", classification_report(y_test, preds))
 
+#output:Accuracy: 0.8895820336868372
+
+#Classification Report:
+#               precision    recall  f1-score   support
+
+#           0       0.90      0.87      0.89      7089
+#           1       0.88      0.91      0.89      7338
+
+#    accuracy                           0.89     14427
+#   macro avg       0.89      0.89      0.89     14427
+#weighted avg       0.89      0.89      0.89     14427
