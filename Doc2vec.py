@@ -38,7 +38,7 @@ preds = clf.predict(X_test)
 print("Accuracy:", accuracy_score(y_test, preds))
 print("\nClassification Report:\n", classification_report(y_test, preds))
 
-#output:Accuracy: 0.8895820336868372
+#Accuracy: 0.8895820336868372
 
 #Classification Report:
 #               precision    recall  f1-score   support
